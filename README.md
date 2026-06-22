@@ -42,12 +42,34 @@ npm install
 npm run dev
 ```
 
+The Vite development server is useful for working on the UI in a browser. Chrome
+extension APIs are available when the built extension is loaded in Chrome.
+
+## Build
+
+```bash
+npm run build
+```
+
+The production-ready extension is generated in `dist/`.
+
+## Load in Chrome
+
+1. Run `npm run build`.
+2. Open `chrome://extensions` in Chrome.
+3. Enable **Developer mode**.
+4. Select **Load unpacked**.
+5. Choose the generated `dist/` folder.
+
+After rebuilding, select the extension's **Reload** button on the extensions
+page to test the latest changes.
+
 ## Roadmap
 
-- [ ] Chrome extension setup
-- [ ] Popup UI
+- [x] Chrome extension setup
+- [x] Popup UI
 - [ ] Football API integration
-- [ ] API key configuration page
+- [x] API key configuration page
 - [ ] Live score display
 - [ ] Goal scorer display
 - [ ] Match notifications

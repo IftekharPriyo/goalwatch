@@ -1,0 +1,192 @@
+:root {
+  color: #17211b;
+  background: #f4f7f4;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.popup-shell,
+.options-shell {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.popup-shell {
+  width: 360px;
+}
+
+.options-shell {
+  width: min(100%, 680px);
+  margin: 48px auto;
+}
+
+.app-header h1 {
+  margin: 3px 0 4px;
+  color: #102d1d;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+}
+
+.app-header p,
+.matches-placeholder p {
+  margin: 0;
+  color: #607066;
+  line-height: 1.5;
+}
+
+.eyebrow {
+  color: #19864b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card {
+  padding: 16px;
+  border: 1px solid #dce6df;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(24 74 44 / 6%);
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.status-badge--configured {
+  color: #116a38;
+  background: #dcf7e7;
+}
+
+.status-badge--missing {
+  color: #9b3c21;
+  background: #ffebe4;
+}
+
+.status-badge--loading {
+  color: #58635c;
+  background: #edf1ee;
+}
+
+.button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 9px;
+  color: #ffffff;
+  background: #177f47;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.button:hover:not(:disabled) {
+  background: #116b3a;
+}
+
+.button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgb(23 127 71 / 25%);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.button--secondary {
+  color: #166e3e;
+  background: #e7f5ed;
+}
+
+.button--secondary:hover:not(:disabled) {
+  background: #d8eddf;
+}
+
+.matches-placeholder {
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.matches-placeholder h2 {
+  margin: 8px 0 6px;
+  font-size: 17px;
+}
+
+.placeholder-icon {
+  font-size: 26px;
+}
+
+.settings-card {
+  padding: 24px;
+}
+
+form {
+  margin-top: 24px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #bdcbc1;
+  border-radius: 9px;
+  color: #17211b;
+  background: #fbfdfb;
+}
+
+.field-hint {
+  margin: 7px 0 0;
+  color: #6b786f;
+  font-size: 12px;
+}
+
+.message {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+.message--success {
+  color: #116a38;
+}
+
+.message--error {
+  color: #a13b28;
+}
+
