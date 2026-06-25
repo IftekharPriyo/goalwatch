@@ -34,14 +34,14 @@ export function Options() {
       <header className="app-header">
         <span className="eyebrow">GoalWatch</span>
         <h1>Settings</h1>
-        <p>Add the API key that will power live scores in Phase 2.</p>
+        <p>Add your API-FOOTBALL key to power live scores.</p>
       </header>
 
       <section className="card settings-card">
         <ApiKeyStatus configured={Boolean(apiKey.trim())} loading={loading} />
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="api-key">Football API key</label>
+          <label htmlFor="api-key">API-FOOTBALL key</label>
           <input
             id="api-key"
             name="api-key"
@@ -55,7 +55,9 @@ export function Options() {
             disabled={loading}
             placeholder="Enter your API key"
           />
-          <p className="field-hint">Stored only in this browser using Chrome local storage.</p>
+          <p className="field-hint">
+            Get a key from API-Sports. It is stored only in this browser using Chrome local storage.
+          </p>
 
           <button className="button" type="submit" disabled={loading || saveState === "saving"}>
             {saveState === "saving" ? "Saving…" : "Save API key"}

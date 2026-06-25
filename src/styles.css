@@ -30,6 +30,7 @@ input {
 }
 
 .popup-shell {
+<<<<<<< HEAD
   width: 360px;
   max-height: 560px;
   overflow: hidden;
@@ -38,6 +39,10 @@ input {
 .popup-shell > .card:last-child {
   min-height: 0;
   max-height: 360px;
+=======
+  width: 380px;
+  max-height: 600px;
+>>>>>>> 1fce08336bd732418e912488881bae6bbb8fc8a7
   overflow-y: auto;
 }
 
@@ -54,7 +59,7 @@ input {
 }
 
 .app-header p,
-.matches-placeholder p {
+.state-panel p {
   margin: 0;
   color: #607066;
   line-height: 1.5;
@@ -142,20 +147,51 @@ input:focus-visible {
   background: #d8eddf;
 }
 
-.matches-placeholder {
+.matches-section,
+.matches-list {
+  display: grid;
+  gap: 12px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.text-button {
+  padding: 4px;
+  border: 0;
+  color: #177f47;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+.state-panel {
   padding: 28px 20px;
   text-align: center;
 }
 
-.matches-placeholder h2 {
-  margin: 8px 0 6px;
-  font-size: 17px;
+.state-panel .button {
+  margin-top: 12px;
 }
 
 .placeholder-icon {
   font-size: 26px;
 }
 
+<<<<<<< HEAD
 .matches-card {
   display: grid;
   min-height: 0;
@@ -224,6 +260,109 @@ input:focus-visible {
   border: 1px solid #e3ebe6;
   border-radius: 12px;
   background: #fbfdfb;
+=======
+.spinner {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 10px;
+  border: 3px solid #dce6df;
+  border-top-color: #177f47;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.match-card {
+  position: relative;
+}
+
+.match-status {
+  margin-bottom: 10px;
+  color: #177f47;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.team-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 0;
+}
+
+.team-row span {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-row strong {
+  font-size: 20px;
+}
+
+.scorers {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #edf1ee;
+}
+
+.scorers h3 {
+  margin: 0 0 7px;
+  color: #5c6b61;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.scorers ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scorers li {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.scorers li span {
+  display: grid;
+}
+
+.scorers small {
+  margin-top: 1px;
+  color: #77837b;
+  font-size: 10px;
+}
+
+.scorers time {
+  color: #177f47;
+  font-weight: 800;
+}
+
+.scorers-empty {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #edf1ee;
+  color: #77837b;
+  font-size: 12px;
+>>>>>>> 1fce08336bd732418e912488881bae6bbb8fc8a7
 }
 
 .settings-card {
