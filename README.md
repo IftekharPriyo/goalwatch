@@ -42,14 +42,57 @@ npm install
 npm run dev
 ```
 
+The Vite development server is useful for working on the UI in a browser. Chrome
+extension APIs are available when the built extension is loaded in Chrome.
+
+## Build
+
+```bash
+npm run build
+```
+
+The production-ready extension is generated in `dist/`.
+
+## Load in Chrome
+
+1. Run `npm run build`.
+2. Open `chrome://extensions` in Chrome.
+3. Enable **Developer mode**.
+4. Select **Load unpacked**.
+5. Choose the generated `dist/` folder.
+
+After rebuilding, select the extension's **Reload** button on the extensions
+page to test the latest changes.
+
+## Football API
+
+GoalWatch uses [API-FOOTBALL by API-Sports](https://www.api-football.com/).
+
+1. Create an API-Sports account and obtain an API-FOOTBALL key.
+2. Open the GoalWatch extension settings.
+3. Enter and save the key.
+4. Open the popup to load matches that are currently live.
+
+The extension downloads a sanitized FIFA World Cup schedule published by this
+repository's GitHub Pages workflow and caches it in `chrome.storage.local`.
+The workflow reads football-data.org with the repository's private
+`FOOTBALL_DATA_TOKEN`; users never need that token. Upcoming and Past read the
+cache without contacting API-FOOTBALL. Live first checks cached kickoff times,
+then requests `GET /fixtures?live=all` only when a match could be active. Goal
+events are requested for active matches that have scored.
+
+The `.github/workflows/publish-world-cup-data.yml` workflow runs every six
+hours and can also be started manually. GitHub Pages must use **GitHub Actions**
+as its deployment source.
+
 ## Roadmap
 
-- [ ] Chrome extension setup
-- [ ] Popup UI
-- [ ] Football API integration
-- [ ] API key configuration page
-- [ ] Live score display
-- [ ] Goal scorer display
+- [x] Chrome extension setup
+- [x] Popup UI
+- [x] Football API integration
+- [x] API key configuration page
+- [x] Live score display
+- [x] Goal scorer display
 - [ ] Match notifications
 - [ ] Favorite teams support
 
