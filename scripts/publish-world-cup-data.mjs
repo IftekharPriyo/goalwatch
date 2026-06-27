@@ -25,6 +25,26 @@ const statusMap = {
   CANCELLED: ["CANC", "Cancelled"],
 };
 
+const stageMap = {
+  GROUP_STAGE: "Group Stage",
+  ROUND_OF_32: "Round of 32",
+  LAST_16: "Round of 16",
+  ROUND_OF_16: "Round of 16",
+  QUARTER_FINALS: "Quarter-finals",
+  SEMI_FINALS: "Semi-finals",
+  THIRD_PLACE: "Third-place Match",
+  FINAL: "Final",
+};
+
+function formatStage(stage) {
+  if (!stage) return null;
+  return stageMap[stage] ?? stage
+    .toLowerCase()
+    .split("_")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 const fixtures = (data.matches ?? []).map((match) => {
   const [statusShort, status] = statusMap[match.status] ?? [match.status, match.status];
   return {
@@ -38,6 +58,8 @@ const fixtures = (data.matches ?? []).map((match) => {
     status,
     statusShort,
     kickoff: match.utcDate,
+    tournamentStage: formatStage(match.stage),
+    group: match.group ?? null,
     scorers: [],
   };
 });
