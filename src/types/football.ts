@@ -27,6 +27,8 @@ export interface LiveMatch {
 export interface WorldCupFixture extends LiveMatch {
   kickoff: string;
   statusShort: string;
+  tournamentStage: string | null;
+  group: string | null;
 }
 
 export interface FixtureCache {

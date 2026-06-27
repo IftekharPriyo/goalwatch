@@ -3,6 +3,7 @@ import type { ExtensionStorage } from "../types/storage";
 
 const API_KEY_STORAGE_KEY: keyof ExtensionStorage = "footballApiKey";
 const FIXTURES_STORAGE_KEY: keyof ExtensionStorage = "worldCupFixtures";
+const API_KEY_PROMPT_STORAGE_KEY: keyof ExtensionStorage = "hasSeenApiKeyPrompt";
 
 function getStorageValue<T>(key: string): Promise<T | undefined> {
   return new Promise((resolve, reject) => {
@@ -48,5 +49,13 @@ export async function getFixtureCache(): Promise<FixtureCache | null> {
 
 export async function saveFixtureCache(cache: FixtureCache): Promise<void> {
   await setStorageValue({ [FIXTURES_STORAGE_KEY]: cache });
+}
+
+export async function hasSeenApiKeyPrompt(): Promise<boolean> {
+  return (await getStorageValue<boolean>(API_KEY_PROMPT_STORAGE_KEY)) ?? false;
+}
+
+export async function markApiKeyPromptSeen(): Promise<void> {
+  await setStorageValue({ [API_KEY_PROMPT_STORAGE_KEY]: true });
 }
 
