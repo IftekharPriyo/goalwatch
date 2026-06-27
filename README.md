@@ -73,11 +73,17 @@ GoalWatch uses [API-FOOTBALL by API-Sports](https://www.api-football.com/).
 3. Enter and save the key.
 4. Open the popup to load matches that are currently live.
 
-The extension requests `GET /fixtures?live=all` for live scores, then keeps only
-fixtures whose league ID is `1` (API-FOOTBALL's FIFA World Cup league ID). For
-World Cup fixtures with goals, it requests `GET /fixtures/events?fixture={id}`
-to map goal scorers. API request quotas and competition availability depend on
-the user's API-Sports plan.
+The extension downloads a sanitized FIFA World Cup schedule published by this
+repository's GitHub Pages workflow and caches it in `chrome.storage.local`.
+The workflow reads football-data.org with the repository's private
+`FOOTBALL_DATA_TOKEN`; users never need that token. Upcoming and Past read the
+cache without contacting API-FOOTBALL. Live first checks cached kickoff times,
+then requests `GET /fixtures?live=all` only when a match could be active. Goal
+events are requested for active matches that have scored.
+
+The `.github/workflows/publish-world-cup-data.yml` workflow runs every six
+hours and can also be started manually. GitHub Pages must use **GitHub Actions**
+as its deployment source.
 
 ## Roadmap
 
