@@ -23,6 +23,7 @@ interface ApiFixture {
   };
   league: {
     id: number;
+    round: string | null;
   };
   teams: {
     home: { id: number; name: string };
@@ -172,6 +173,8 @@ function mapFixture(fixture: ApiFixture, scorers: GoalScorer[] | null): WorldCup
     status: fixture.fixture.status.long || fixture.fixture.status.short,
     statusShort: fixture.fixture.status.short,
     kickoff: fixture.fixture.date,
+    tournamentStage: fixture.league.round,
+    group: null,
     scorers,
   };
 }

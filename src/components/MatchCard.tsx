@@ -4,6 +4,7 @@ import { ScoreList } from "./ScoreList";
 interface MatchCardProps {
   match: WorldCupFixture;
   showKickoff?: boolean;
+  showScorers?: boolean;
 }
 
 function formatMatchStatus(match: WorldCupFixture, showKickoff: boolean) {
@@ -24,10 +25,19 @@ function formatMatchStatus(match: WorldCupFixture, showKickoff: boolean) {
   return match.status;
 }
 
-export function MatchCard({ match, showKickoff = false }: MatchCardProps) {
+export function MatchCard({
+  match,
+  showKickoff = false,
+  showScorers = false,
+}: MatchCardProps) {
   return (
     <article className="card match-card">
       <div className="match-status">{formatMatchStatus(match, showKickoff)}</div>
+      {(match.tournamentStage || match.group) && (
+        <div className="match-context">
+          {[match.tournamentStage, match.group].filter(Boolean).join(" · ")}
+        </div>
+      )}
       <div className="team-row">
         <span>{match.homeTeam.name}</span>
         <strong>{match.homeScore ?? "–"}</strong>
@@ -36,7 +46,7 @@ export function MatchCard({ match, showKickoff = false }: MatchCardProps) {
         <span>{match.awayTeam.name}</span>
         <strong>{match.awayScore ?? "–"}</strong>
       </div>
-      <ScoreList scorers={match.scorers} />
+      {showScorers && <ScoreList scorers={match.scorers} />}
     </article>
   );
 }
