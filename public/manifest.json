@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GoalWatch — Football Live Scores",
   "description": "A lightweight extension for checking live football scores.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "permissions": ["storage"],
   "host_permissions": [
     "https://v3.football.api-sports.io/*",
