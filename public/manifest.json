@@ -4,7 +4,10 @@
   "description": "A lightweight extension for checking live football scores.",
   "version": "0.1.0",
   "permissions": ["storage"],
-  "host_permissions": ["https://v3.football.api-sports.io/*"],
+  "host_permissions": [
+    "https://v3.football.api-sports.io/*",
+    "https://iftekharpriyo.github.io/*"
+  ],
   "action": {
     "default_title": "GoalWatch",
     "default_popup": "popup.html"

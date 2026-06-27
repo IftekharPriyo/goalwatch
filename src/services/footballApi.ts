@@ -1,8 +1,9 @@
 import { getApiKey } from "./storage";
-import type { GoalScorer, LiveMatch } from "../types/football";
+import type { GoalScorer, WorldCupFixture } from "../types/football";
 
 const API_BASE_URL = "https://v3.football.api-sports.io";
 const FIFA_WORLD_CUP_LEAGUE_ID = 1;
+const ACTIVE_STATUSES = new Set(["1H", "HT", "2H", "ET", "BT", "P", "SUSP", "INT"]);
 
 interface ApiResponse<T> {
   errors?: Record<string, string> | string[];
@@ -12,6 +13,7 @@ interface ApiResponse<T> {
 interface ApiFixture {
   fixture: {
     id: number;
+    date: string;
     status: {
       long: string;
       short: string;
@@ -156,7 +158,7 @@ async function getFixtureScorers(fixtureId: number, apiKey: string) {
   return mapGoalEvents(events);
 }
 
-function mapFixture(fixture: ApiFixture, scorers: GoalScorer[] | null): LiveMatch {
+function mapFixture(fixture: ApiFixture, scorers: GoalScorer[] | null): WorldCupFixture {
   const isClockRunning = ["1H", "2H", "ET"].includes(fixture.fixture.status.short);
 
   return {
@@ -168,17 +170,24 @@ function mapFixture(fixture: ApiFixture, scorers: GoalScorer[] | null): LiveMatc
     minute: isClockRunning ? fixture.fixture.status.elapsed : null,
     extraMinute: isClockRunning ? fixture.fixture.status.extra : null,
     status: fixture.fixture.status.long || fixture.fixture.status.short,
+    statusShort: fixture.fixture.status.short,
+    kickoff: fixture.fixture.date,
     scorers,
   };
 }
 
-export async function getLiveMatches(): Promise<LiveMatch[]> {
+async function getApiKeyOrThrow(): Promise<string> {
   const apiKey = (await getApiKey()).trim();
 
   if (!apiKey) {
-    throw new FootballApiError("Add an API key in settings to load live matches.", "missing-key");
+    throw new FootballApiError("Add an API key in settings to load matches.", "missing-key");
   }
 
+  return apiKey;
+}
+
+export async function getLiveMatches(): Promise<WorldCupFixture[]> {
+  const apiKey = await getApiKeyOrThrow();
   const fixtures = await request<ApiFixture>("/fixtures?live=all", apiKey);
   const worldCupFixtures = fixtures.filter(
     (fixture) => fixture.league.id === FIFA_WORLD_CUP_LEAGUE_ID,
@@ -188,7 +197,7 @@ export async function getLiveMatches(): Promise<LiveMatch[]> {
     worldCupFixtures.map(async (fixture) => {
       const totalGoals = (fixture.goals.home ?? 0) + (fixture.goals.away ?? 0);
 
-      if (totalGoals === 0) {
+      if (totalGoals === 0 || !ACTIVE_STATUSES.has(fixture.fixture.status.short)) {
         return mapFixture(fixture, []);
       }
 

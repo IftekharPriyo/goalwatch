@@ -51,7 +51,15 @@ Responsibilities:
 Chrome storage is used for:
 
 - Saving the user's API key
+- Caching World Cup fixtures and final scores
 - Later saving favorite teams or preferences
+
+### 5. Shared Schedule Feed
+
+A scheduled GitHub Action uses a repository secret to fetch World Cup fixtures
+from football-data.org. It publishes only sanitized fixture JSON to GitHub
+Pages. The popup downloads this public feed, while API-FOOTBALL remains the
+source for live scores and goal events.
 
 ## Suggested Folder Structure
 
@@ -77,13 +85,13 @@ src/
 ```txt
 User opens popup
       ↓
-Extension reads API key from storage
+Extension reads cached World Cup fixtures
       ↓
-Extension calls football API
+Upcoming and Past render without an API request
       ↓
-API returns live match data
+Live checks the cached kickoff window
       ↓
-UI displays score, minute, and scorers
+API is called only when a match could be active
 ```
 
 ## Future Architecture

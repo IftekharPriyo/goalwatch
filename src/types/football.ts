@@ -24,3 +24,14 @@ export interface LiveMatch {
   scorers: GoalScorer[] | null;
 }
 
+export interface WorldCupFixture extends LiveMatch {
+  kickoff: string;
+  statusShort: string;
+}
+
+export interface FixtureCache {
+  fixtures: WorldCupFixture[];
+  updatedAt: number;
+  season: number;
+}
+
